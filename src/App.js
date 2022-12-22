@@ -4,6 +4,8 @@ import "./App.css";
 
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
+
 import { News } from "./pages/News/Index";
 import { NewsDetails } from "./pages/News/Details";
 import { Package } from "./pages/Package";
@@ -36,6 +38,7 @@ function App() {
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />}></Route>
           <Route path="login" element={<Login />}></Route>
+          <Route path="register" element={<Register />}></Route>
           <Route path="news">
             <Route index element={<News />}></Route>
             <Route path=":id" element={<NewsDetails />}></Route>
