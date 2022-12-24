@@ -1,19 +1,18 @@
 import "./App.css";
-// import Button from "@mui/material/Button";
-// import styled from "@emotion/styled";
+import { Route, Routes } from "react-router-dom";
+import { Navbar } from "./component/Navbar";
 
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
-
 import { News } from "./pages/News/Index";
 import { NewsDetails } from "./pages/News/Details";
 import { Package } from "./pages/Package";
+import { AboutUs } from "./pages/AboutUs";
+//
+import { User } from "./pages/User/Index";
+
 import { NotFound } from "./pages/NotFound";
-
-import { Navbar } from "./component/Navbar";
-
-import { Route, Routes } from "react-router-dom";
 
 function App() {
   // const Button = styled.button`
@@ -44,7 +43,11 @@ function App() {
             <Route path=":id" element={<NewsDetails />}></Route>
           </Route>
           <Route path="package" element={<Package />}></Route>
+          <Route path="about_us" element={<AboutUs />}></Route>
           <Route path="*" element={<NotFound />}></Route>
+        </Route>
+        <Route path="/user">
+          <Route index element={<User />}></Route>
         </Route>
       </Routes>
 
