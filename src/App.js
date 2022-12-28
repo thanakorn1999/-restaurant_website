@@ -10,7 +10,18 @@ import { NewsDetails } from "./pages/News/Details";
 import { Package } from "./pages/Package";
 import { AboutUs } from "./pages/AboutUs";
 //
-import { User } from "./pages/User/Index";
+
+import { LayoutUser } from "./pages/User/Index";
+import { Dashboard } from "./pages/User/Index/Dashboard";
+import { GlobalSetting } from "./pages/User/Index/GlobalSetting";
+import { Profile } from "./pages/User/Index/Profile";
+import { MyRestaurant } from "./pages/User/Index/MyRestaurant/Index";
+import { MyRestaurantId } from "./pages/User/Index/MyRestaurant/_Id/Index";
+//
+import { Customer } from "./pages/User/Index/MyRestaurant/_Id/Customer";
+import { Kitchen } from "./pages/User/Index/MyRestaurant/_Id/Kitchen";
+import { Menu } from "./pages/User/Index/MyRestaurant/_Id/Menu";
+import { Setting } from "./pages/User/Index/MyRestaurant/_Id/Setting";
 
 import { NotFound } from "./pages/NotFound";
 
@@ -30,24 +41,37 @@ function App() {
   return (
     <>
       {/* <Routes location="/">
-        <Route path="/" element={<Navbar />}></Route>
+        <Route path="/" element={<Navbar />}/>
       </Routes> */}
       {/* https://www.youtube.com/watch?v=Ul3y1LXxzdU&ab_channel=WebDevSimplified */}
       <Routes>
         <Route path="/" element={<Navbar />}>
-          <Route index element={<Home />}></Route>
-          <Route path="login" element={<Login />}></Route>
-          <Route path="register" element={<Register />}></Route>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
           <Route path="news">
-            <Route index element={<News />}></Route>
-            <Route path=":id" element={<NewsDetails />}></Route>
+            <Route index element={<News />} />
+            <Route path=":id" element={<NewsDetails />} />
           </Route>
-          <Route path="package" element={<Package />}></Route>
-          <Route path="about_us" element={<AboutUs />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
+          <Route path="package" element={<Package />} />
+          <Route path="about_us" element={<AboutUs />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
-        <Route path="/user">
-          <Route index element={<User />}></Route>
+        {/* User */}
+        <Route path="/user" element={<LayoutUser />}>
+          <Route index element={<Dashboard />} />
+          <Route path="global_setting" element={<GlobalSetting />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="my_restaurant">
+            <Route index element={<MyRestaurant />} />
+            <Route path=":id">
+              <Route index element={<MyRestaurantId />} />
+              <Route path="customer" element={<Customer />} />
+              <Route path="kitchen" element={<Kitchen />} />
+              <Route path="menu" element={<Menu />} />
+              <Route path="setting" element={<Setting />} />
+            </Route>
+          </Route>
         </Route>
       </Routes>
 
