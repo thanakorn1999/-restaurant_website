@@ -93,6 +93,7 @@ export function Login() {
                           variant="contained"
                           component={Link}
                           to="/user"
+                          xs={{ borderRadius: 30 }}
                         >
                           ส่งข้อมูล
                         </Button>
