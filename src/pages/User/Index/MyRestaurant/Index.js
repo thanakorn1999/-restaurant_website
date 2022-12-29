@@ -67,7 +67,7 @@ const MyComponents = {
     }
     if (data) {
       return (
-        <Card sx={{ height: `100%` }}>
+        <Card variant="outlined" sx={{ height: `100%` }}>
           <Grid
             container
             direction="row"

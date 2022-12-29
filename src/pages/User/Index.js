@@ -34,7 +34,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import FaceIcon from "@mui/icons-material/Face";
 //
 import { useEffect, useState } from "react";
-
+import { grey } from "@mui/material/colors";
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -178,7 +178,9 @@ export function LayoutUser() {
   const headerMenu = "ร้านค้าของฉัน";
   return (
     <>
-      <Box sx={{ display: "flex" }}>
+      <Box
+        sx={{ display: "flex", backgroundColor: grey[200], minHeight: `100vh` }}
+      >
         <CssBaseline />
         <AppBar position="fixed" open={open}>
           <Toolbar>

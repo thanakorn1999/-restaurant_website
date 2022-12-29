@@ -20,7 +20,7 @@ import { MyRestaurantId } from "./pages/User/Index/MyRestaurant/_Id/Index";
 //
 import { Customer } from "./pages/User/Index/MyRestaurant/_Id/Customer";
 import { Kitchen } from "./pages/User/Index/MyRestaurant/_Id/Kitchen";
-import { Menu } from "./pages/User/Index/MyRestaurant/_Id/Menu";
+import { Menu } from "./pages/User/Index/MyRestaurant/_Id/Menu/Index";
 import { Setting } from "./pages/User/Index/MyRestaurant/_Id/Setting";
 
 import { NotFound } from "./pages/NotFound";
