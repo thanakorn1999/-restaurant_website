@@ -1,37 +1,29 @@
-import * as React from "react";
-//
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-// import CardActions from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-// import SwipeableViews from "react-swipeable-views";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
+import axios from "../../../../../../axiosinstance";
 
-//
+import {
+  Grid,
+  Card,
+  Tabs,
+  Tab,
+  CardMedia,
+  CardContent,
+  Button,
+  Container,
+  Typography,
+  Box,
+  InputAdornment,
+  TextField,
+  Dialog,
+  useTheme,
+} from "@mui/material";
 import AppsIcon from "@mui/icons-material/Apps";
 import AddIcon from "@mui/icons-material/Add";
-
-//
-import InputAdornment from "@mui/material/InputAdornment";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import SearchIcon from "@mui/icons-material/Search";
 
 import { DialogFood } from "./component/DialogFood";
-import { DialogGroupFood } from "./component/DialogGroupFood";
 
-import SearchIcon from "@mui/icons-material/Search";
 const MyComponents = {
   getFoodCard: function getFoodCard(data) {
     if (data) {
@@ -40,6 +32,7 @@ const MyComponents = {
           <Card variant="outlined" sx={{ maxWidth: 345 }}>
             <CardMedia
               sx={{ height: 140 }}
+              lazy="true"
               image="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e"
               title="green iguana"
             />
@@ -47,14 +40,7 @@ const MyComponents = {
               <Typography gutterBottom variant="subtitle2" component="div">
                 {data.title}
               </Typography>
-              {/* <Typography variant="body2" color="text.secondary">
-                {data.detail}
-              </Typography> */}
             </CardContent>
-            {/* <CardActions>
-              <Button size="small">Share</Button>
-              <Button size="small">Learn More</Button>
-            </CardActions> */}
           </Card>
         </>
       );
@@ -66,7 +52,6 @@ const MyComponents = {
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -91,439 +76,69 @@ TabPanel.propTypes = {
 
 export function Menu() {
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+
+  // TAB
+  const [tabValue, setTabValue] = useState(0);
+  const handleChangeTabs = (event, newValue) => {
+    setQuery("");
+    setTabValue(newValue);
   };
-  // const handleChangeIndex = (index) => {
-  //   setValue(index);
-  // };
-  const ObjectMenu = [
-    {
-      id: 1,
-      title: "GROUP 1",
-      detail: "detail GROUP 1",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-        {
-          id: 1,
-          title: "FOOD 11",
-          detail: "detail FOOD 11",
-        },
-        {
-          id: 2,
-          title: "FOOD 12",
-          detail: "detail FOOD 12",
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "GROUP 2",
-      detail: "detail GROUP 2",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 21",
-          detail: "detail FOOD 21",
-        },
-        {
-          id: 2,
-          title: "FOOD 22",
-          detail: "detail FOOD 22",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "GROUP 3",
-      detail: "detail GROUP 3",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 31",
-          detail: "detail FOOD 31",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "GROUP 3",
-      detail: "detail GROUP 3",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 31",
-          detail: "detail FOOD 31",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "GROUP 3",
-      detail: "detail GROUP 3",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 31",
-          detail: "detail FOOD 31",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "GROUP 3",
-      detail: "detail GROUP 3",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 31",
-          detail: "detail FOOD 31",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "GROUP 3",
-      detail: "detail GROUP 3",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 31",
-          detail: "detail FOOD 31",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "GROUP 3",
-      detail: "detail GROUP 3",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 31",
-          detail: "detail FOOD 31",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "GROUP 3",
-      detail: "detail GROUP 3",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 31",
-          detail: "detail FOOD 31",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "GROUP 3",
-      detail: "detail GROUP 3",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 31",
-          detail: "detail FOOD 31",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "GROUP 3",
-      detail: "detail GROUP 3",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 31",
-          detail: "detail FOOD 31",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "GROUP 3",
-      detail: "detail GROUP 3",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 31",
-          detail: "detail FOOD 31",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "GROUP 3",
-      detail: "detail GROUP 3",
-      listMenu: [
-        {
-          id: 1,
-          title: "FOOD 31",
-          detail: "detail FOOD 31",
-        },
-      ],
-    },
-  ];
 
-  const [statusDialog, setStatusDialog] = React.useState(false);
-
+  // DIALOG
+  const [statusDialog, setStatusDialog] = useState(false);
   const handleDialogOpen = () => {
     setStatusDialog(true);
-    console.log(`handleDialogOpen`);
   };
-
   const handleDialogClose = () => {
     setStatusDialog(false);
   };
+
+  // DATA FROM API
+  useEffect(() => {
+    axios
+      .get("/generate")
+      .then((response) => {
+        if (response.data.success === "success") {
+          setData(response.data.message);
+        } else {
+          console.log(response.data.message_th);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  const [data, setData] = useState([]);
+  const [query, setQuery] = useState("");
+  const filteredMenu =
+    data[tabValue]?.listMenu?.filter(
+      (item) =>
+        item.detail.includes(query) ||
+        item.title.includes(query) ||
+        query === "" ||
+        query === null
+    ) ?? [];
+  const handleChangeSearch = (event) => {
+    setQuery(event.target.value);
+  };
+
   return (
     <>
       {/* PAGE */}
       <Grid container direction="row" spacing={2} alignItems="flex-start">
         {/* LEFT */}
-        <Grid item xs={8}>
-          {/* <Box sx={{ maxWidth: { xs: 320, sm: 480 }, bgcolor: "background.paper" }}> */}
+        <Grid item xs={12} md={8}>
+          {/* TABS */}
           <Grid container alignItems="center">
-            <Grid item xs={11}>
+            <Grid item xs={11} sx={{ overflow: "hidden", width: `300px` }}>
               <Tabs
-                value={value}
-                onChange={handleChange}
+                value={tabValue}
+                onChange={handleChangeTabs}
                 variant="scrollable"
                 scrollButtons="auto"
                 aria-label="scrollable auto tabs example"
               >
-                {ObjectMenu.map((item, index) => (
+                {data.map((item, index) => (
                   <Tab label={item.title} key={`tab${item.title}${index}`} />
                 ))}
               </Tabs>
@@ -534,24 +149,10 @@ export function Menu() {
               </Button>
             </Grid>
           </Grid>
+          {/* SEARCH */}
           <Grid container justifyContent="end">
             <Grid item>
               <Container>
-                {/* <TextField
-                  margin="dense"
-                  id="searchMenu"
-                  label="searchMenu"
-                  size="small"
-                /> */}
-                {/* <Box sx={{ display: "flex", alignItems: "flex-cender" }}>
-                  <SearchIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-                  <TextField
-                    id="input-search"
-                    label="ค้นหา"
-                    variant="outlined"
-                    size="small"
-                  />
-                </Box> */}
                 <TextField
                   id="input-search"
                   label="ค้นหา"
@@ -565,65 +166,82 @@ export function Menu() {
                       </InputAdornment>
                     ),
                   }}
+                  value={query}
+                  onChange={handleChangeSearch}
                 />
               </Container>
             </Grid>
           </Grid>
-          {/* </Box> */}
-          {/* LIST MUNT */}
-          {ObjectMenu.map((item, index) => (
-            <TabPanel
-              value={value}
-              index={index}
-              dir={theme.direction}
-              key={`TabPanel${item.title}${index}`}
-            >
-              {/* listMenu */}
-              <Grid
-                container
-                direction="row"
-                spacing={1}
-                sx={{ height: `70vh`, overflowY: "scroll" }}
+          {/* TabPanel && listMenu */}
+          <Grid
+            container
+            justifyContent="end"
+            sx={{ height: `70vh`, overflowY: "scroll", mt: 1 }}
+          >
+            {data.map((item, index) => (
+              <TabPanel
+                value={tabValue}
+                index={index}
+                dir={theme.direction}
+                key={`TabPanel${item.title}${index}`}
               >
-                {item.listMenu.map((itemMenu, indexMenu) => (
-                  <Grid
-                    item
-                    xs={4}
-                    sm={4}
-                    md={3}
-                    key={`${itemMenu.title}${indexMenu}`}
-                  >
-                    {MyComponents.getFoodCard(itemMenu)}
-                  </Grid>
-                ))}
-              </Grid>
-            </TabPanel>
-          ))}
+                <Grid
+                  container
+                  direction="row"
+                  alignItems="flex-start"
+                  justifyContent="flex-star"
+                  spacing={1}
+                >
+                  {filteredMenu.length !== 0 ? (
+                    filteredMenu.map((itemMenu, indexMenu) => (
+                      <Grid
+                        item
+                        xs={6}
+                        md={3}
+                        key={`${itemMenu.title}${indexMenu}`}
+                      >
+                        {MyComponents.getFoodCard(itemMenu)}
+                      </Grid>
+                    ))
+                  ) : (
+                    <Grid item key={`notf`}>
+                      <Typography
+                        variant="subtitle2"
+                        sx={{ textAlign: "center" }}
+                      >
+                        ไม่พบรายการที่ค้นหา
+                      </Typography>
+                    </Grid>
+                  )}
+                </Grid>
+              </TabPanel>
+            ))}
+          </Grid>
         </Grid>
         {/* RIGHT */}
-        <Grid container item xs={4} spacing={2}>
-          <Grid item xs={12}>
-            {/* <Card variant="outlined" sx={{ py: 3 }}> */}
-            {/* <Container> */}
-            <Grid container>
-              <Grid item>
-                <Button
-                  startIcon={<AddIcon />}
-                  variant="contained"
-                  disableElevation
-                  onClick={handleDialogOpen}
-                >
-                  เพิ่มรายการใหม่
-                </Button>
+        <Grid item xs={12} md={4}>
+          <Grid container spacing={1}>
+            {/* ADD */}
+            <Grid item xs={12}>
+              <Grid container>
+                <Grid item>
+                  <Button
+                    startIcon={<AddIcon />}
+                    variant="contained"
+                    disableElevation
+                    onClick={handleDialogOpen}
+                  >
+                    เพิ่มรายการใหม่
+                  </Button>
+                </Grid>
               </Grid>
             </Grid>
-            {/* </Container> */}
-            {/* </Card> */}
-          </Grid>
-          <Grid item xs={12}>
-            <Card variant="outlined" sx={{ py: 5 }}>
-              <Container>DETAILS</Container>
-            </Card>
+            {/* Details */}
+            <Grid item xs={12}>
+              <Card variant="outlined" sx={{ py: 5 }}>
+                <Container>{data?.date_create ?? "Loading"}</Container>
+              </Card>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -635,5 +253,3 @@ export function Menu() {
     </>
   );
 }
-
-// export default Login;

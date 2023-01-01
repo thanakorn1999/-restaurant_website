@@ -1,11 +1,14 @@
-import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+
+import {
+  Grid,
+  Container,
+  Card,
+  CardMedia,
+  Typography,
+  TextField,
+  Button,
+} from "@mui/material";
 
 export function Login() {
   return (
@@ -109,5 +112,3 @@ export function Login() {
     </>
   );
 }
-
-// export default Login;
