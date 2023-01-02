@@ -24,9 +24,6 @@ const navItems = [
 export function Navbar() {
   return (
     <>
-      {/* style={{ background: "transparent", boxShadow: "none" }} */}
-      {/* <Box sx={{ display: "flex" }}> */}
-
       <AppBar
         component="nav"
         color="transparent"
@@ -74,11 +71,7 @@ export function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      {/* <Offset /> */}
-      {/* <HomeIcon /> */}
       <Outlet />
     </>
   );
 }
-
-// export default Login;

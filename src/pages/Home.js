@@ -55,7 +55,7 @@ export function Home() {
           spacing={0}
           style={{ minHeight: "100vh" }}
         >
-          <Grid item sx={12} md={9}>
+          <Grid item xs={12} md={9}>
             <Typography variant="h3">
               Lorem Ipsum is simply dummy text of the printing and typesetting
             </Typography>
@@ -117,7 +117,7 @@ export function Home() {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item sx={3}>
+        <Grid item xs={3}>
           <Typography variant="h5">
             ทุกตัวช่วยที่คุณต้องการอยู่ในระบบเดียว
           </Typography>
