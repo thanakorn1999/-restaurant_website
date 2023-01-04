@@ -106,6 +106,7 @@ const rows = [
 export function Dashboard() {
   const classes = useStyles();
   const [dateDashboard, setDashboard] = useState(null);
+  const [dateDashboardTopTen, setDashboardTopTen] = useState(null);
   useEffect(() => {
     const dataFromAPI = {
       labels: [
@@ -161,7 +162,51 @@ export function Dashboard() {
           data: [110, 223, 140, 300, 290],
         },
       ],
+      topTenFood: [
+        {
+          labels: [
+            `ต้มยำกุ้ง 1`,
+            `ต้มยำกุ้ง 2`,
+            `ต้มยำกุ้ง 3`,
+            `ต้มยำกุ้ง 4`,
+            `ต้มยำกุ้ง 5`,
+          ],
+          data: [400, 300, 350, 200, 280],
+        },
+      ],
     };
+    setDashboardTopTen({
+      labels: [
+        `ต้มยำกุ้ง 1`,
+        `ต้มยำกุ้ง 2`,
+        `ต้มยำกุ้ง 3`,
+        `ต้มยำกุ้ง 4`,
+        `ต้มยำกุ้ง 5`,
+      ],
+      datasets: [
+        {
+          label: "top 10 อาหาร",
+          data: [12, 19, 3, 5, 2],
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    });
 
     const color = [
       `#3C6255`,
@@ -176,6 +221,9 @@ export function Dashboard() {
       `#46C2CB`,
       `#F2F7A1`,
     ];
+    dataFromAPI.topTenFood.backgroundColor = [...color];
+    dataFromAPI.topTenFood.borderColor = [...color];
+
     let bufferDatasets = [];
     dataFromAPI.sumMyRestaurant.forEach((elm, index) => {
       bufferDatasets.push({
@@ -189,6 +237,7 @@ export function Dashboard() {
     setDashboard({
       labels: dataFromAPI.labels,
       sumMyRestaurant: bufferDatasets,
+      topTenFood: dataFromAPI.topTenFood,
     });
   }, []);
 
@@ -240,11 +289,6 @@ export function Dashboard() {
           <Grid item xs={12} md={8}>
             {/* SUM CARD */}
             <Grid container alignContent="flex-start" spacing={1}>
-              {/* {[3, 2, 3, 4].map((item, index) => (
-                <Grid item xs={12} md={3}>
-                  {MyComponents.DataCard(item)}
-                </Grid>
-              ))} */}
               <Grid item xs={12} md={3}>
                 {MyComponents.DataCard({
                   label: "ยอดรวมทั้งหมด",
@@ -287,10 +331,6 @@ export function Dashboard() {
                         datasets={dateDashboard.sumMyRestaurant}
                       />
                     ) : (
-                      // <PieChart
-                      //   labels={dateDashboard.labels}
-                      //   datasets={dateDashboard.sumMyRestaurant}
-                      // />
                       ""
                     )}
                   </Container>
@@ -385,14 +425,30 @@ export function Dashboard() {
                 >
                   Top 10 อาหารขายดี
                 </Typography>
-                {dateDashboard !== null ? (
-                  <PieChart
-                    labels={dateDashboard.labels}
-                    datasets={[dateDashboard.sumMyRestaurant[0]]}
-                  />
-                ) : (
-                  ""
-                )}
+                <Grid
+                  container
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="center"
+                  spacing={1}
+                  sx={{ py: 1 }}
+                >
+                  <Grid item xs={12} md={8}>
+                    {dateDashboardTopTen !== null ? (
+                      <PieChart datasets={dateDashboardTopTen} />
+                    ) : (
+                      ""
+                    )}
+                  </Grid>
+                </Grid>
+                <Typography
+                  variant="subtitle2"
+                  fontWeight="bold"
+                  component="div"
+                  sx={{ pb: 2 }}
+                >
+                  รายชื่อ
+                </Typography>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) =>
                   MyComponents.FoodCard(item)
                 )}

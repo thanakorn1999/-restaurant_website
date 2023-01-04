@@ -17,6 +17,7 @@ import {
   TextField,
   Dialog,
   useTheme,
+  CardActionArea,
 } from "@mui/material";
 import AppsIcon from "@mui/icons-material/Apps";
 import AddIcon from "@mui/icons-material/Add";
@@ -30,17 +31,19 @@ const MyComponents = {
       return (
         <>
           <Card variant="outlined" sx={{ maxWidth: 345 }}>
-            <CardMedia
-              sx={{ height: 140 }}
-              lazy="true"
-              image="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e"
-              title="green iguana"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="subtitle2" component="div">
-                {data.title}
-              </Typography>
-            </CardContent>
+            <CardActionArea>
+              <CardMedia
+                sx={{ height: 140 }}
+                lazy
+                image="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e"
+                title="green iguana"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="subtitle2" component="div">
+                  {data.title}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
           </Card>
         </>
       );
@@ -124,7 +127,6 @@ export function Menu() {
 
   return (
     <>
-      {/* PAGE */}
       <Grid container direction="row" spacing={2} alignItems="flex-start">
         {/* LEFT */}
         <Grid item xs={12} md={8}>
@@ -173,9 +175,8 @@ export function Menu() {
             </Grid>
           </Grid>
           {/* TabPanel && listMenu */}
-          <Grid
-            container
-            justifyContent="end"
+          <Container
+            disableGutters
             sx={{ height: `70vh`, overflowY: "scroll", mt: 1 }}
           >
             {data.map((item, index) => (
@@ -188,8 +189,8 @@ export function Menu() {
                 <Grid
                   container
                   direction="row"
+                  justifyContent="flex-start"
                   alignItems="flex-start"
-                  justifyContent="flex-star"
                   spacing={1}
                 >
                   {filteredMenu.length !== 0 ? (
@@ -216,33 +217,23 @@ export function Menu() {
                 </Grid>
               </TabPanel>
             ))}
-          </Grid>
+          </Container>
         </Grid>
         {/* RIGHT */}
         <Grid item xs={12} md={4}>
-          <Grid container spacing={1}>
-            {/* ADD */}
-            <Grid item xs={12}>
-              <Grid container>
-                <Grid item>
-                  <Button
-                    startIcon={<AddIcon />}
-                    variant="contained"
-                    disableElevation
-                    onClick={handleDialogOpen}
-                  >
-                    เพิ่มรายการใหม่
-                  </Button>
-                </Grid>
-              </Grid>
-            </Grid>
-            {/* Details */}
-            <Grid item xs={12}>
-              <Card variant="outlined" sx={{ py: 5 }}>
-                <Container>{data?.date_create ?? "Loading"}</Container>
-              </Card>
-            </Grid>
-          </Grid>
+          {/* ADD */}
+          <Button
+            startIcon={<AddIcon />}
+            variant="contained"
+            disableElevation
+            onClick={handleDialogOpen}
+          >
+            เพิ่มรายการใหม่
+          </Button>
+          {/* Details */}
+          <Card variant="outlined" sx={{ py: 5, mt: 2 }}>
+            <Container>{data?.date_create ?? "Loading"}</Container>
+          </Card>
         </Grid>
       </Grid>
       {/* DIALOGS */}

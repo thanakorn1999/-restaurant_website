@@ -6,10 +6,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export function PieChart(props) {
   const [data, setData] = useState(null);
   useEffect(() => {
-    setData({
-      labels: props.labels,
-      datasets: props.datasets,
-    });
+    setData(props.datasets);
   }, []);
   const options = {
     plugins: {
@@ -23,7 +20,14 @@ export function PieChart(props) {
   } else
     return (
       <>
-        <Pie data={data} options={options} />
+        <Pie
+          data={data}
+          options={options}
+          sx={{
+            width: `100px`,
+            height: `100px`,
+          }}
+        />
       </>
     );
 }

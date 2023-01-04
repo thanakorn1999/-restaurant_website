@@ -19,7 +19,7 @@ import { MyRestaurant } from "./pages/User/Index/MyRestaurant/Index";
 import { MyRestaurantId } from "./pages/User/Index/MyRestaurant/_Id/Index";
 //
 import { Customer } from "./pages/User/Index/MyRestaurant/_Id/Customer";
-import { Kitchen } from "./pages/User/Index/MyRestaurant/_Id/Kitchen";
+import { Kitchen } from "./pages/User/Index/MyRestaurant/_Id/Kitchen/Index";
 import { Menu } from "./pages/User/Index/MyRestaurant/_Id/Menu/Index";
 import { Setting } from "./pages/User/Index/MyRestaurant/_Id/Setting";
 
