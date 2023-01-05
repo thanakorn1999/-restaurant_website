@@ -7,7 +7,11 @@ import Typography from "@mui/material/Typography";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { deleteCard, editCard, editDescription } from "../actions";
+import {
+  deleteCard,
+  editCard,
+  editDescription,
+} from "../../../../../../../actions";
 import Dialog from "@mui/material/Dialog";
 
 import DialogActions from "@mui/material/DialogActions";

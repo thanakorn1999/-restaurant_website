@@ -16,7 +16,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
-import Grid from "@mui/material/Grid";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
@@ -313,63 +312,3 @@ export function LayoutUser() {
     </>
   );
 }
-
-// import React, { useState } from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
-// import TextField from '@material-ui/core/TextField';
-// import Button from '@material-ui/core/Button';
-
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     '& .MuiTextField-root': {
-//       margin: theme.spacing(1),
-//       width: 200,
-//     },
-//   },
-//   button: {
-//     margin: theme.spacing(1),
-//   },
-// }));
-
-// function FormExample() {
-//   const classes = useStyles();
-//   const [name, setName] = useState('');
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-
-//   const handleSubmit = event => {
-//     event.preventDefault();
-//     // Perform form submission or data handling here
-//   };
-
-//   return (
-//     <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
-//       <div>
-//         <TextField
-//           label="Name"
-//           value={name}
-//           onChange={event => setName(event.target.value)}
-//           variant="outlined"
-//         />
-//         <TextField
-//           label="Email"
-//           value={email}
-//           onChange={event => setEmail(event.target.value)}
-//           variant="outlined"
-//         />
-//         <TextField
-//           label="Password"
-//           type="password"
-//           value={password}
-//           onChange={event => setPassword(event.target.value)}
-//           variant="outlined"
-//         />
-//       </div>
-//       <Button className={classes.button} variant="contained" color="primary" type="submit">
-//         Submit
-//       </Button>
-//     </form>
-//   );
-// }
-
-// export default FormExample;

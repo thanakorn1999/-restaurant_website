@@ -1,10 +1,11 @@
-import { black } from "material-ui/styles/colors";
-// import {boxShadow} from 'jss-plugin-expand';
 import React from "react";
-import Card from "./TrelloCard";
-import ActionButton from "./ActionButton";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+//
 import styled from "styled-components";
+
+//
+import ActionButton from "./ActionButton";
+import Card from "./TrelloCard";
 
 const List = styled.div`
   background-color: #dfe3e6;
@@ -24,10 +25,12 @@ const List = styled.div`
   }
 `;
 
-const Title = styled.h4`
-  font-family: "Roboto";
-`;
-
+// const Title = styled.h4`
+//   font-family: "Roboto";
+// `;
+{
+  /* <Title>{title}</Title> */
+}
 const TrelloList = ({ title, cards, listId, index }) => {
   return (
     <Draggable draggableId={String(listId)} index={index}>
@@ -41,7 +44,7 @@ const TrelloList = ({ title, cards, listId, index }) => {
             {/* Everything inside a droppable must be within a React render props function */}
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
-                <Title>{title}</Title>
+                {title}
                 {cards.map((card, index) => (
                   <Card
                     listTitle={title}

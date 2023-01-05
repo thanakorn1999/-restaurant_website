@@ -5,14 +5,20 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { theme } from "./theme";
 import { ThemeProvider } from "@mui/material";
+import { Provider } from "react-redux";
+import store from "./store";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 // https://codesandbox.io/s/frello-2-forked-gdp0e4?file=/src/components/App.js
 root.render(
   <>
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </Provider>
     </BrowserRouter>
   </>
 );
