@@ -5,22 +5,22 @@ import { Navbar } from "./component/Navbar";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
-import { News } from "./pages/News/Index";
+import { News } from "./pages/News";
 import { NewsDetails } from "./pages/News/Details";
 import { Package } from "./pages/Package";
 import { AboutUs } from "./pages/AboutUs";
 //
 
-import { LayoutUser } from "./pages/User/Index";
+import { LayoutUser } from "./pages/User";
 import { Dashboard } from "./pages/User/Index/Dashboard";
 import { GlobalSetting } from "./pages/User/Index/GlobalSetting";
 import { Profile } from "./pages/User/Index/Profile";
-import { MyRestaurant } from "./pages/User/Index/MyRestaurant/Index";
-import { MyRestaurantId } from "./pages/User/Index/MyRestaurant/_Id/Index";
+import { MyRestaurant } from "./pages/User/Index/MyRestaurant";
+import { MyRestaurantId } from "./pages/User/Index/MyRestaurant/_Id";
 //
 import { Customer } from "./pages/User/Index/MyRestaurant/_Id/Customer";
-import Kitchen from "./pages/User/Index/MyRestaurant/_Id/Kitchen/Index";
-import { Menu } from "./pages/User/Index/MyRestaurant/_Id/Menu/Index";
+import Kitchen from "./pages/User/Index/MyRestaurant/_Id/Kitchen";
+import { Menu } from "./pages/User/Index/MyRestaurant/_Id/Menu";
 import { Setting } from "./pages/User/Index/MyRestaurant/_Id/Setting";
 
 import { NotFound } from "./pages/NotFound";
