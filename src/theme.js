@@ -4,8 +4,7 @@ export const theme = createTheme({
   palette: {
     primary: {
       main: "#FF914D",
-
-      light: "#skyblue",
+      light: "skyblue",
       contrastText: "white",
     },
     secondary: {
@@ -13,8 +12,10 @@ export const theme = createTheme({
       contrastText: "white",
     },
     otherColor: {
-      main: "#999",
-      grey: "#D9D9D9",
+      grey: {
+        main: "#999",
+        lignthen: "#D9D9D9",
+      },
     },
   },
 });
