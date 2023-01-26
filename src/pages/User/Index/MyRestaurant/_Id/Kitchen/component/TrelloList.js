@@ -3,6 +3,7 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 //
 import styled from "styled-components";
 
+import Typography from "@mui/material/Typography";
 //
 import ActionButton from "./ActionButton";
 import Card from "./TrelloCard";
@@ -44,7 +45,7 @@ const TrelloList = ({ title, cards, listId, index }) => {
             {/* Everything inside a droppable must be within a React render props function */}
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
-                {title}
+                <Typography variant="subtitle2">{title}</Typography>
                 {cards.map((card, index) => (
                   <Card
                     listTitle={title}

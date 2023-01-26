@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "../../../../../../axiosinstance";
-
+import Icon from "@mui/material/Icon";
 import {
   Grid,
   Card,
@@ -10,6 +10,7 @@ import {
   CardMedia,
   CardContent,
   Button,
+  IconButton,
   Container,
   Typography,
   Box,
@@ -22,36 +23,8 @@ import {
 import AppsIcon from "@mui/icons-material/Apps";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
-
 import { DialogFood } from "./component/DialogFood";
-
-const MyComponents = {
-  getFoodCard: function getFoodCard(data) {
-    if (data) {
-      return (
-        <>
-          <Card variant="outlined" sx={{ maxWidth: 345 }}>
-            <CardActionArea>
-              <CardMedia
-                sx={{ height: 140 }}
-                lazy
-                image="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e"
-                title="green iguana"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="subtitle2" component="div">
-                  {data.title}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </>
-      );
-    } else {
-      return <>have no data</>;
-    }
-  },
-};
+import { DetailsSelectionFood } from "./component/DetailsSelectionFood";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -80,20 +53,43 @@ TabPanel.propTypes = {
 export function Menu() {
   const theme = useTheme();
 
-  // TAB
+  // DATA
   const [tabValue, setTabValue] = useState(0);
+  const [data, setData] = useState([]);
+  const [query, setQuery] = useState("");
+
+  const [itemSelect, setItemSelect] = useState(null);
+  const [modeDialog, setModeDialog] = useState("add");
+  const [statusDialog, setStatusDialog] = useState(false);
+
+  const filteredMenu =
+    data[tabValue]?.listMenu?.filter(
+      (item) =>
+        item.detail.includes(query) ||
+        item.title.includes(query) ||
+        query === "" ||
+        query === null
+    ) ?? [];
+
+  // METHODS
   const handleChangeTabs = (event, newValue) => {
     setQuery("");
     setTabValue(newValue);
   };
 
-  // DIALOG
-  const [statusDialog, setStatusDialog] = useState(false);
-  const handleDialogOpen = () => {
-    setStatusDialog(true);
+  const handleStatusDialogAdd = (mode) => {
+    setModeDialog("add");
+    setStatusDialog(mode);
   };
-  const handleDialogClose = () => {
-    setStatusDialog(false);
+
+  const handleStatusDialogEdit = (mode) => {
+    console.log(`handleStatusDialogEdit`, mode);
+    setModeDialog("edit");
+    setStatusDialog(mode);
+  };
+
+  const handleChangeSearch = (event) => {
+    setQuery(event.target.value);
   };
 
   // DATA FROM API
@@ -111,23 +107,44 @@ export function Menu() {
         console.error(error);
       });
   }, []);
-  const [data, setData] = useState([]);
-  const [query, setQuery] = useState("");
-  const filteredMenu =
-    data[tabValue]?.listMenu?.filter(
-      (item) =>
-        item.detail.includes(query) ||
-        item.title.includes(query) ||
-        query === "" ||
-        query === null
-    ) ?? [];
-  const handleChangeSearch = (event) => {
-    setQuery(event.target.value);
+
+  // MyComponents
+  const MyComponents = {
+    getFoodCard: function getFoodCard(data) {
+      if (data) {
+        return (
+          <>
+            <Card variant="outlined" sx={{ maxWidth: 345 }}>
+              <CardActionArea
+                onClick={() => setItemSelect({ ...data, type: "item" })}
+              >
+                {/* sx={{ height: 140 }} */}
+                <CardMedia
+                  style={{ aspectRatio: 4 / 3 }}
+                  lazy
+                  image={data?.img ?? ""}
+                  title="green iguana"
+                />
+                {/* image="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e" */}
+
+                <CardContent>
+                  <Typography gutterBottom variant="subtitle2" component="div">
+                    {data.title}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </>
+        );
+      } else {
+        return <>have no data</>;
+      }
+    },
   };
 
   return (
     <>
-      <Grid container direction="row" spacing={2} alignItems="flex-start">
+      <Grid container direction="row" spacing={2}>
         {/* LEFT */}
         <Grid item xs={12} md={8}>
           {/* TABS */}
@@ -151,33 +168,51 @@ export function Menu() {
               </Button>
             </Grid>
           </Grid>
-          {/* SEARCH */}
-          <Grid container justifyContent="end">
+          {/* HEADER/SEARCH */}
+          <Grid
+            container
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ mt: 3, mb: 2 }}
+          >
             <Grid item>
-              <Container>
-                <TextField
-                  id="input-search"
-                  label="ค้นหา"
-                  variant="outlined"
-                  size="small"
-                  sx={{ mt: 3 }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <SearchIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                  value={query}
-                  onChange={handleChangeSearch}
-                />
-              </Container>
+              <Grid container alignItems={"center"} spacing={1}>
+                <Grid item>
+                  <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                    {data[tabValue]?.title}
+                  </Typography>
+                </Grid>
+                {tabValue !== 0 ? (
+                  <Grid item>
+                    <IconButton size="small">
+                      <Icon color="primary">edit</Icon>
+                    </IconButton>
+                  </Grid>
+                ) : null}
+              </Grid>
+            </Grid>
+            <Grid item>
+              <TextField
+                id="input-search"
+                label="ค้นหา"
+                variant="outlined"
+                size="small"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                value={query}
+                onChange={handleChangeSearch}
+              />
             </Grid>
           </Grid>
           {/* TabPanel && listMenu */}
           <Container
             disableGutters
-            sx={{ height: `70vh`, overflowY: "scroll", mt: 1 }}
+            sx={{ height: `70vh`, overflowY: "scroll" }}
           >
             {data.map((item, index) => (
               <TabPanel
@@ -198,7 +233,8 @@ export function Menu() {
                       <Grid
                         item
                         xs={6}
-                        md={3}
+                        md={4}
+                        xl={3}
                         key={`${itemMenu.title}${indexMenu}`}
                       >
                         {MyComponents.getFoodCard(itemMenu)}
@@ -221,25 +257,47 @@ export function Menu() {
         </Grid>
         {/* RIGHT */}
         <Grid item xs={12} md={4}>
-          {/* ADD */}
+          {/* BTN ADD */}
+
           <Button
             startIcon={<AddIcon />}
             variant="contained"
             disableElevation
-            onClick={handleDialogOpen}
+            onClick={() => handleStatusDialogAdd(true)}
           >
+            {/* () => sayHello('James') */}
+            {/* handleStatusDialogAdd(true) */}
+            {/* handleDialogOpen */}
             เพิ่มรายการใหม่
           </Button>
           {/* Details */}
-          <Card variant="outlined" sx={{ py: 5, mt: 2 }}>
-            <Container>{data?.date_create ?? "Loading"}</Container>
+          {/* handleOpenDialogEdit={() => } */}
+          <Card variant="outlined" sx={{ mt: 2, height: `100%` }}>
+            <Container sx={{ py: 2, height: `100%` }}>
+              {itemSelect?.type === "item" ? (
+                <DetailsSelectionFood
+                  handleOpenDialogEdit={() => handleStatusDialogEdit(true)}
+                  data={itemSelect}
+                />
+              ) : (
+                ""
+              )}
+            </Container>
           </Card>
         </Grid>
       </Grid>
-      {/* DIALOGS */}
-      <Dialog open={statusDialog} onClose={handleDialogClose}>
-        <DialogFood handleDialogClose={handleDialogClose} />
-        {/* <DialogGroupFood /> */}
+      {/* DIALOGS : ADD / EDIT FOOD */}
+      <Dialog
+        fullWidth
+        maxWidth="md"
+        open={statusDialog}
+        onClose={() => handleStatusDialogAdd(false)}
+      >
+        <DialogFood
+          mode={modeDialog}
+          data={itemSelect}
+          handleDialogClose={() => handleStatusDialogAdd(false)}
+        />
       </Dialog>
     </>
   );

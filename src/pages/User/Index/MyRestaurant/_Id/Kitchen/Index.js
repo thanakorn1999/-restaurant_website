@@ -76,3 +76,27 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(Kitchen);
+// {
+//   work:[
+//   {
+//   table:1,
+//   status:0,
+//   detail:{
+//   type:'food',
+//   food_id:1
+//   },
+//   logs:[
+//   {
+//   date:'2025-01-03',
+//   user_id:1,
+//   }
+//   ],
+//   }
+//   ],
+//   user:[
+//   {
+//   name:'',
+//   work:[],
+//   },
+//   ]
+//   }

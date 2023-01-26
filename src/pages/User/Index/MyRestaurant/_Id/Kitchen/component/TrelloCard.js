@@ -25,7 +25,8 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Grid from "@mui/material/Grid";
 import ModalSideList from "./ModalSideList";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import NotesIcon from "@mui/icons-material/Notes";
 const CardContainer = styled.div`
   margin-bottom: 0.5em;
 `;
@@ -217,20 +218,15 @@ class TrelloCard extends React.Component {
                   margin: "0.1em",
                 }}
               >
-                <Icon
+                <VisibilityIcon
                   fontSize="small"
                   style={{ marginLeft: 8, cursor: "pointer", color: "gray" }}
-                >
-                  visibility
-                </Icon>
+                />
                 {this.state.description !== "" &&
                 this.state.showDescription !== "none" ? (
-                  <Icon
-                    fontSize="small"
+                  <NotesIcon
                     style={{ marginLeft: 8, cursor: "pointer", color: "gray" }}
-                  >
-                    notes
-                  </Icon>
+                  />
                 ) : (
                   ""
                 )}

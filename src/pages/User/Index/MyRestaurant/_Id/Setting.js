@@ -1,3 +1,10 @@
+import { Grid, Container } from "@mui/material";
 export function Setting() {
-  return <>Setting</>;
+  return (
+    <>
+      <>tags</>
+      <>promotion</>
+      <>ลดราคา</>
+    </>
+  );
 }
